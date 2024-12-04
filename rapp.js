@@ -80,14 +80,7 @@ let currentUW = localStorage.getItem('currentUW');
     }
  
     else if (document.title.includes('Client file: ')) {
-        const button = document.createElement('button');
-        button.id = 'GTask';
-        button.textContent = 'Update Task';
-        button.style.position = 'fixed';
-        button.style.bottom = '20px';
-        button.style.right = '20px';
- 
-        button.addEventListener('click', function() {
+        
             const fileInput = document.createElement('input');
             fileInput.type = 'file';
             fileInput.style.display = 'none'; // Hide the file input
@@ -98,12 +91,11 @@ let currentUW = localStorage.getItem('currentUW');
  
             // Remove the file input after file selection
             fileInput.remove();
-        });
  
         // Append the button to the body
         document.body.appendChild(button);
  
-        const button2 = document.createElement('button');
+        /*const button2 = document.createElement('button');
         button2.id = 'CTask';
         button2.textContent = 'Close Task';
         button2.style.position = 'fixed';
@@ -127,7 +119,7 @@ let currentUW = localStorage.getItem('currentUW');
                 //window.location.href = 'https://threeholdings.my.salesforce.com' + href + '/e?retURL=%2F' + id;
                 localStorage.setItem('CloseTask', 1)
             }
-        });
+        });*/
  
         // Append the Close Task button to the body
         document.body.appendChild(button2);
