@@ -80,20 +80,16 @@ let currentUW = localStorage.getItem('currentUW');
     }
  
     else if (document.title.includes('Client file: ')) {
-        
-            const fileInput = document.createElement('input');
-            fileInput.type = 'file';
-            fileInput.style.display = 'none'; // Hide the file input
-            fileInput.addEventListener('change', handleFileSelect, false);
- 
-            // Trigger the file input
-            fileInput.click();
- 
-            // Remove the file input after file selection
-            fileInput.remove();
- 
-        // Append the button to the body
-        document.body.appendChild(button);
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.style.display = 'none'; // Hide the file input
+        fileInput.addEventListener('change', handleFileSelect, false);
+
+        // Trigger the file input
+        fileInput.click();
+
+        // Remove the file input after file selection
+        fileInput.remove();
  
         /*const button2 = document.createElement('button');
         button2.id = 'CTask';
@@ -119,10 +115,10 @@ let currentUW = localStorage.getItem('currentUW');
                 //window.location.href = 'https://threeholdings.my.salesforce.com' + href + '/e?retURL=%2F' + id;
                 localStorage.setItem('CloseTask', 1)
             }
-        });*/
+        });
  
         // Append the Close Task button to the body
-        document.body.appendChild(button2);
+        document.body.appendChild(button2);*/
  
         function handleFileSelect(event) {
             const file = event.target.files[0];
