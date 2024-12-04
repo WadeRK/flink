@@ -1,20 +1,20 @@
-let LapseTask = GM_getValue('LapseTask');
-let UW = GM_getValue('UW');
-let exDate = GM_getValue('exDate');
-let R4Lapse = GM_getValue('R4Lapse');
-let R4CRAST = GM_getValue('R4CRAST');
-let CloseTask = GM_getValue('CloseTask');
-let UWInternal = GM_getValue('UWInternal');
-let tabName = GM_getValue('tabName');
+let LapseTask = localStorage.getItem('LapseTask');
+let UW = localStorage.getItem('UW');
+let exDate = localStorage.getItem('exDate');
+let R4Lapse = localStorage.getItem('R4Lapse');
+let R4CRAST = localStorage.getItem('R4CRAST');
+let CloseTask = localStorage.getItem('CloseTask');
+let UWInternal = localStorage.getItem('UWInternal');
+let tabName = localStorage.getItem('tabName');
  
 (function() {
     'use strict';
     if (document.title.includes('Task: ') && LapseTask == 1) {
-        GM_setValue('LapseTask', 0)
+        localStorage.setItem('LapseTask', 0)
  
-        document.getElementById('tsk1').value = GM_getValue('UW')
+        document.getElementById('tsk1').value = localStorage.getItem('UW')
         document.getElementById('00N3h00000AxyOA').value = 'Renewal application';
-        var tName = GM_getValue('tName').replace("RAST", "Lapse - Broker's Request")
+        var tName = localStorage.getItem('tName').replace("RAST", "Lapse - Broker's Request")
         document.getElementById('tsk5').value = tName
         var d = new Date();
         document.getElementById('tsk4').value = [d.getDate(), d.getMonth() + 1, d.getFullYear()].map(n => n.toString().padStart(2, '0')).join('/');
@@ -23,12 +23,12 @@ let tabName = GM_getValue('tabName');
  
         document.evaluate('//*[@id="topButtonRow"]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
  
-        GM_setValue('UW', 0)
-        GM_setValue('exDate', 0)
+        localStorage.setItem('UW', 0)
+        localStorage.setItem('exDate', 0)
     }
  
-    else if (document.title.includes('Client file: ') && GM_getValue('R4Lapse') == 1) {
-        GM_setValue('R4Lapse', 0)
+    else if (document.title.includes('Client file: ') && localStorage.getItem('R4Lapse') == 1) {
+        localStorage.setItem('R4Lapse', 0)
  
         var xpath = '//*[contains(@id, "_RelatedActivityList")]/div[1]/div/div[1]/table/tbody/tr/td[2]/input[1]';
         var button = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
@@ -37,17 +37,17 @@ let tabName = GM_getValue('tabName');
             //alert('https://threeholdings.my.salesforce.com/' + url.match(/%26eid%3D([^%]+)%26ic%3D1%26linkToken/)?.[1] + '?retURL=%2F' + id)
  
             document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
-            GM_setValue('LapseTask', 1)
+            localStorage.setItem('LapseTask', 1)
         } else {
             alert('Button not found');
         }
     }
  
     else if (document.title.includes('Task: ') && CloseTask == 1) {
-        GM_setValue('CloseTask', 0)
-        GM_setValue('R4Lapse', 1)
+        localStorage.setItem('CloseTask', 0)
+        localStorage.setItem('R4Lapse', 1)
  
-        GM_setValue('tName', document.getElementById('tsk5').value)
+        localStorage.setItem('tName', document.getElementById('tsk5').value)
  
         document.evaluate('//*[@id="topButtonRow"]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
     }
@@ -55,7 +55,7 @@ let tabName = GM_getValue('tabName');
     else if (document.title.includes('Client file: ')) {
         // Beginning
 
-        GM_setValue('tabName', document.title)
+        localStorage.setItem('tabName', document.title)
  
             var url = window.location.href;
             var parts = url.split('/');
@@ -64,7 +64,7 @@ let tabName = GM_getValue('tabName');
             //var id = idParts[0]; // Get the ID part
             var id = parts[3];
  
-            GM_setValue('UW', document.evaluate("/html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[4]/div[2]/div[7]/table/tbody/tr[7]/td[2]/a", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent);
+            localStorage.setItem('UW', document.evaluate("/html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[4]/div[2]/div[7]/table/tbody/tr[7]/td[2]/a", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent);
  
             copyToClipboard(document.evaluate("/html/body/div/div[2]/table/tbody/tr/td[2]/div[1]/div[1]/div[1]/h2", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent);
  
@@ -72,14 +72,14 @@ let tabName = GM_getValue('tabName');
                 var href = document.evaluate("//a[contains(text(), 'RAST')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.getAttribute('href');
                 window.location.href = 'https://threeholdings.my.salesforce.com' + href + '/e?close=1&retURL=%2F' + id;
                 //window.location.href = 'https://threeholdings.my.salesforce.com' + href + '/e?retURL=%2F' + id;
-                GM_setValue('CloseTask', 1)
+                localStorage.setItem('CloseTask', 1)
             }
  
             else if (document.evaluate("//a[contains(text(), 'Lapse -')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue) {
                 href = document.evaluate("//a[contains(text(), 'Lapse')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.getAttribute('href');
                 window.location.href = 'https://threeholdings.my.salesforce.com' + href + '/e?close=1&retURL=%2F' + id;
                 //window.location.href = 'https://threeholdings.my.salesforce.com' + href + '/e?retURL=%2F' + id;
-                GM_setValue('CloseTask', 1)
+                localStorage.setItem('CloseTask', 1)
             }
     }
  
