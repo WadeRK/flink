@@ -335,49 +335,39 @@ else if ((document.title.includes('Client file: ')) && CFdata == 1) {
  
 else if (document.title.includes('Application: ')) {
     // Function to handle button click
-    function handleButtonClick() {
-        localStorage.setItem('WTOF', document.title)
- 
-        if (document.title.includes('Excess/Umbrella: ')) {
-            localStorage.setItem('program', '')
-            localStorage.setItem('province', '')
-            document.evaluate('//*[@id="topButtonRow"]/input[4]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
-        }
- 
-        else if (document.title.includes('Security: ')) {
-            localStorage.setItem('crimelimit', document.evaluate('//*[@id="00N3h00000I7hCt_ileinner"]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent)
- 
-            // Select the div element by ID
-            var divElement = document.getElementById('a3D3h000006qii1_00N3h00000I7hA0');
- 
-            // Check if the div contains "QC"
-            if (divElement && divElement.innerHTML.includes("QC")) {
-                localStorage.setItem('isQC', "Y")
-            } else {
-                localStorage.setItem('isQC', "N")
-            }
- 
-            document.evaluate('//*[@id="topButtonRow"]/input[4]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
-        }
- 
-        else if (document.title.includes('E&O: '))
-        {
-            localStorage.setItem('program', document.evaluate('//*[@id="00N3h00000EhaRs_ileinner"]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent)
-            localStorage.setItem('province', document.evaluate('//*[@id="00N3h00000EhaS8_ileinner"]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.toUpperCase())
-            document.evaluate('//*[@id="topButtonRow"]/input[5]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
-        }
- 
-        localStorage.setItem('CFdata', 1)
+    localStorage.setItem('WTOF', document.title)
+
+    if (document.title.includes('Excess/Umbrella: ')) {
+        localStorage.setItem('program', '')
+        localStorage.setItem('province', '')
+        document.evaluate('//*[@id="topButtonRow"]/input[4]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
     }
- 
-    // Create a floating button and append it to the body
-    var button = document.createElement('button');
-    button.innerHTML = 'Export';
-    button.style.position = 'fixed';
-    button.style.right = '20px';
-    button.style.bottom = '50px';
-    button.onclick = handleButtonClick;
-    document.body.appendChild(button);
+
+    else if (document.title.includes('Security: ')) {
+        localStorage.setItem('crimelimit', document.evaluate('//*[@id="00N3h00000I7hCt_ileinner"]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent)
+
+        // Select the div element by ID
+        var divElement = document.getElementById('a3D3h000006qii1_00N3h00000I7hA0');
+
+        // Check if the div contains "QC"
+        if (divElement && divElement.innerHTML.includes("QC")) {
+            localStorage.setItem('isQC', "Y")
+        } else {
+            localStorage.setItem('isQC', "N")
+        }
+
+        document.evaluate('//*[@id="topButtonRow"]/input[4]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
+    }
+
+    else if (document.title.includes('E&O: '))
+    {
+        localStorage.setItem('program', document.evaluate('//*[@id="00N3h00000EhaRs_ileinner"]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent)
+        localStorage.setItem('province', document.evaluate('//*[@id="00N3h00000EhaS8_ileinner"]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.toUpperCase())
+        document.evaluate('//*[@id="topButtonRow"]/input[5]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
+    }
+
+    localStorage.setItem('CFdata', 1)
+    
 }
  
 function downloadCSV() {
