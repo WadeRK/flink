@@ -109,16 +109,8 @@ let tabName = localStorage.getItem('tabName');
     else if (document.title.includes('Client file: ')) {
         // Beginning
  
-        const button = document.createElement('button');
-        button.id = 'Renewal App';
-        button.textContent = 'Renewal App';
-        button.style.position = 'fixed';
-        button.style.bottom = '140px';
-        button.style.right = '20px';
- 
         localStorage.setItem('tabName', document.title)
  
-        button.addEventListener('click', function() {
             var url = window.location.href;
             var parts = url.split('/');
             var idWithFragment = parts[parts.length - 1]; // Get the part after the last '/'
@@ -152,10 +144,6 @@ let tabName = localStorage.getItem('tabName');
             else {
                 window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + id + '&status=Underwriting%20(internal)';
             }
-        });
- 
-        // Append the button to the body
-        document.body.appendChild(button);
     }
  
     function convertToCSV() {
