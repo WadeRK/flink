@@ -37,7 +37,7 @@ if ((document.title.includes('Task: ')) && retrievebrokerdata == 1) {
     function extractToCcAndLbname(content) {
         //var toRegex = /To:\s*([^CC:]+)\s*CC:/;
         var toRegex = /To:\s*([^\n]+)\s*CC:/;
-        var ccRegex = /CC:\s*([^\s]+)\sFrom:/;
+        var ccRegex = /CC:\s*([^\s]+)\s*From:/;
         var lbnameRegex = /(?:Good morning|Good morning,|Good afternoon|Good afternoon,|Good day|Good day,|Hi|Hi,|Hello|Thank you for the instruction,|Thank you for the binding instructions|Bonjour)\s+(\w+).*/; // Modified regex
  
         var toMatch = content.match(toRegex);
