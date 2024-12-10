@@ -45,8 +45,8 @@ if ((document.title.includes('Task: ')) && retrievebrokerdata == 1) {
         var lbnameMatch = content.match(lbnameRegex);
  
         localStorage.setItem('to', toMatch ? toMatch[1].trim() : '')
- alert(localStorage.getItem('bConf'))
-        if (localStorage.getItem('bConf') == 0) {
+ 
+        if (localStorage.getItem('bConf') == 1) {
             localStorage.setItem('cc', ccMatch ? ccMatch[1].trim() : '')
         }
  
