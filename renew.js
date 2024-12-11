@@ -205,44 +205,21 @@ let PickProduct = localStorage.getItem('PickProduct', '');
     }
  
     else if (document.title.includes('Client file: ')) {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.style.display = 'none';
+        input.addEventListener('change', handleFileSelect, false);
  
-        const button = document.createElement('button');
-        button.id = 'GTask';
-        button.textContent = 'Renew';
-        button.style.position = 'fixed';
-        button.style.bottom = '110px';
-        button.style.right = '20px';
-        button.addEventListener('click', handleButtonClick, false);
+        // Append the input element to the body
+        document.body.appendChild(input);
  
-        const button2 = document.createElement('button');
-        button2.id = 'GTask';
-        button2.textContent = 'Renew BP';
-        button2.style.position = 'fixed';
-        button2.style.bottom = '50px';
-        button2.style.right = '20px';
-        button2.addEventListener('click', handleButtonClickBP, false);
+        // Trigger the file dialog
+        input.click();
  
-        // Append the button to the body
-        document.body.appendChild(button);
-        document.body.appendChild(button2);
- 
-        function handleButtonClick(event) {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.style.display = 'none';
-            input.addEventListener('change', handleFileSelect, false);
- 
-            // Append the input element to the body
-            document.body.appendChild(input);
- 
-            // Trigger the file dialog
-            input.click();
- 
-            // Remove the input element after the file dialog is closed
-            input.addEventListener('click', function() {
-                document.body.removeChild(input);
-            }, {once: true});
-        }
+        // Remove the input element after the file dialog is closed
+        input.addEventListener('click', function() {
+            document.body.removeChild(input);
+        }, {once: true});
  
         function handleFileSelect(event) {
             const file = event.target.files[0];
