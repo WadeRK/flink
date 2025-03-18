@@ -80,20 +80,22 @@ let tabName = localStorage.getItem('tabName');
         var idParts = idWithFragment.split('/'); // Split by '#' to separate the ID from the fragment
         //var id = idParts[0]; // Get the ID part
         var id = parts[3];
+
+      if (document.evaluate("//a[contains(text(), 'Lapse -')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue) {
+            href = document.evaluate("//a[contains(text(), 'Lapse')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.getAttribute('href');
+            window.location.href = 'https://threeholdings.my.salesforce.com' + href + '/e?close=1&retURL=%2F' + id;
+            //window.location.href = 'https://threeholdings.my.salesforce.com' + href + '/e?retURL=%2F' + id;
+            localStorage.setItem('CloseTask', 1)
+        }
  
-        if (document.evaluate("//a[contains(text(), 'RAST')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue) {
+       else if (document.evaluate("//a[contains(text(), 'RAST')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue) {
             var href = document.evaluate("//a[contains(text(), 'RAST')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.getAttribute('href');
             window.location.href = 'https://threeholdings.my.salesforce.com' + href + '/e?close=1&retURL=%2F' + id;
             //window.location.href = 'https://threeholdings.my.salesforce.com' + href + '/e?retURL=%2F' + id;
             localStorage.setItem('CloseTask', 1)
         }
  
-        else if (document.evaluate("//a[contains(text(), 'Lapse -')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue) {
-            href = document.evaluate("//a[contains(text(), 'Lapse')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.getAttribute('href');
-            window.location.href = 'https://threeholdings.my.salesforce.com' + href + '/e?close=1&retURL=%2F' + id;
-            //window.location.href = 'https://threeholdings.my.salesforce.com' + href + '/e?retURL=%2F' + id;
-            localStorage.setItem('CloseTask', 1)
-        }
+        
     }
  
     else if (document.title.includes('Salesforce - Enterprise Edition') && localStorage.getItem('UWInternal') == 1) {
