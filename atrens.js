@@ -8,12 +8,11 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
-    let CloseTask = localStorage.getItem('CloseTask');
-    let timetorenew = localStorage.getItem('timetorenew');
-    let timetoamendaddress = localStorage.getItem('timetoamendaddress');
-    let url = localStorage.getItem('url');
+let timetorenew = localStorage.getItem('timetorenew');
+let timetoamendaddress = localStorage.getItem('timetoamendaddress');
+let url = localStorage.getItem('url');
 
+(function() {
     if (document.title.includes('Client file:')) {
         localStorage.setItem('url', window.location.href);
         url = window.location.href;
