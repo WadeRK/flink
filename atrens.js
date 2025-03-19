@@ -34,6 +34,8 @@
             localStorage.setItem('storedVariables', JSON.stringify(lines));
             localStorage.setItem('timetorenew', 'true');
 
+            console.log('timetorenew:', localStorage.getItem('timetorenew'));
+
             const expdate = lines[3];
             const xpath = '/html/body/div/div[2]/table/tbody/tr/td[2]/div[4]/div[2]/div[3]/table/tbody/tr[4]/td[2]';
             const element = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
@@ -56,17 +58,21 @@
         };
         input.click();
     } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('timetorenew') === 'true') {
+        console.log('timetorenew before clicking save:', localStorage.getItem('timetorenew'));
+        
         // Click the save button automatically
-        alert(window.location.href)
         const saveButton = document.getElementById('pg:frm:pb:saveButton');
         if (saveButton) {
             saveButton.click();
             localStorage.setItem('timetorenew', 'false');
             localStorage.setItem('timetoamendaddress', 'true');
+            console.log('timetorenew after clicking save:', localStorage.getItem('timetorenew'));
+            console.log('timetoamendaddress set to:', localStorage.getItem('timetoamendaddress'));
         } else {
             console.log('Save button not found.');
         }
     } else if (document.title.includes('Client file:') && localStorage.getItem('timetoamendaddress') === 'true') {
+        console.log('timetoamendaddress before navigation:', localStorage.getItem('timetoamendaddress'));
         localStorage.setItem('timetoamendaddress', 'false');
         let url = localStorage.getItem('url');
         let id = url.split('/')[3];
