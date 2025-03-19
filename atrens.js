@@ -35,9 +35,6 @@
                 return;
             }
 
-            // Store variables in localStorage
-            localStorage.setItem('storedVariables', JSON.stringify(lines));
-
             const expdate = lines[3];
             const xpath = '/html/body/div/div[2]/table/tbody/tr/td[2]/div[4]/div[2]/div[3]/table/tbody/tr[4]/td[2]';
             const element = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
