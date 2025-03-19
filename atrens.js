@@ -37,7 +37,7 @@
 
             // Store variables in localStorage
             localStorage.setItem('storedVariables', JSON.stringify(lines));
-            localStorage.setItem('timetorenew', 'true');
+            localStorage.setItem('timetorenew', 1);
 
             console.log('timetorenew:', localStorage.getItem('timetorenew'));
 
@@ -62,7 +62,7 @@
             }
         };
         input.click();
-    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && timetorenew === 'true') {
+    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && timetorenew == 1) {
         // Click the save button automatically
         const saveButton = document.getElementById('pg:frm:pb:saveButton');
         if (saveButton) {
