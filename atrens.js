@@ -9,6 +9,10 @@
 // ==/UserScript==
 
 (async function() {
+  console.log('timetorenew before clicking save:', localStorage.getItem('timetorenew'));
+  console.log('timetorenew after clicking save:', localStorage.getItem('timetorenew'));
+  console.log('timetoamendaddress set to:', localStorage.getItem('timetoamendaddress'));
+  console.log(window.location.href);
     if (document.title.includes('Client file:')) {
         localStorage.setItem('url', window.location.href);
         let url = window.location.href;
@@ -58,7 +62,7 @@
         };
         input.click();
     } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('timetorenew') === 'true') {
-        console.log('timetorenew before clicking save:', localStorage.getItem('timetorenew'));
+        
         
         // Click the save button automatically
         const saveButton = document.getElementById('pg:frm:pb:saveButton');
@@ -66,8 +70,7 @@
             saveButton.click();
             localStorage.setItem('timetorenew', 'false');
             localStorage.setItem('timetoamendaddress', 'true');
-            console.log('timetorenew after clicking save:', localStorage.getItem('timetorenew'));
-            console.log('timetoamendaddress set to:', localStorage.getItem('timetoamendaddress'));
+            
         } else {
             console.log('Save button not found.');
         }
