@@ -9,9 +9,9 @@
 // ==/UserScript==
 
 (async function() {
-    let timetorenew = localStorage.getItem('timetorenew', '');
-    let timetoamendaddress = localStorage.getItem('timetoamendaddress', '');
-    let url = localStorage.getItem('url', '');
+    let timetorenew = localStorage.getItem('timetorenew');
+    let timetoamendaddress = localStorage.getItem('timetoamendaddress');
+    let url = localStorage.getItem('url');
     alert(localStorage.getItem('timetorenew'));
     
     if (document.title.includes('Client file:')) {
@@ -58,7 +58,7 @@
             }
         };
         input.click();
-    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('timetorenew') === 1) {
+    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('timetorenew') === '1') {
         alert(timetorenew);
     } else if (document.title.includes('Client file:') && localStorage.getItem('timetoamendaddress') === 'true') {
         console.log('timetoamendaddress before navigation:', localStorage.getItem('timetoamendaddress'));
