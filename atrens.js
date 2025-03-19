@@ -1,6 +1,16 @@
-let timetorenew = localStorage.getItem('timetorenew');
-let timetoamendaddress = localStorage.getItem('timetoamendaddress');
-let url = localStorage.getItem('url');
+// ==UserScript==
+// @name         Client File Validator
+// @namespace    https://github.com/yourusername/yourrepo
+// @version      1.0
+// @description  Validate and navigate based on client file input
+// @author       You
+// @match        *://*/*
+// @grant        none
+// ==/UserScript==
+
+    let timetorenew = localStorage.getItem('timetorenew');
+    let timetoamendaddress = localStorage.getItem('timetoamendaddress');
+    let url = localStorage.getItem('url');
 
 (function() {
     if (document.title.includes('Client file:')) {
@@ -51,7 +61,7 @@ let url = localStorage.getItem('url');
             }
         };
         input.click();
-    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && timetorenew == 1) {
+    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && timetorenew === 1) {
         // Click the save button automatically
         const saveButton = document.getElementById('pg:frm:pb:saveButton');
         if (saveButton) {
