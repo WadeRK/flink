@@ -9,12 +9,8 @@
 // ==/UserScript==
 
 (async function() {
-  console.log('timetorenew before clicking save:', localStorage.getItem('timetorenew'));
-  console.log('timetorenew after clicking save:', localStorage.getItem('timetorenew'));
-  console.log('timetoamendaddress set to:', localStorage.getItem('timetoamendaddress'));
-  console.log(window.location.href);
     if (document.title.includes('Client file:')) {
-        localStorage.setItem('url', window.location.href);
+        sessionStorage.setItem('url', window.location.href);
         let url = window.location.href;
         let parts = url.split('/');
         let id = parts[3];
@@ -34,11 +30,11 @@
                 return;
             }
 
-            // Store variables in localStorage
-            localStorage.setItem('storedVariables', JSON.stringify(lines));
-            localStorage.setItem('timetorenew', 'true');
+            // Store variables in sessionStorage
+            sessionStorage.setItem('storedVariables', JSON.stringify(lines));
+            sessionStorage.setItem('timetorenew', 'true');
 
-            console.log('timetorenew:', localStorage.getItem('timetorenew'));
+            console.log('timetorenew:', sessionStorage.getItem('timetorenew'));
 
             const expdate = lines[3];
             const xpath = '/html/body/div/div[2]/table/tbody/tr/td[2]/div[4]/div[2]/div[3]/table/tbody/tr[4]/td[2]';
@@ -61,23 +57,20 @@
             }
         };
         input.click();
-    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('timetorenew') === 'true') {
-        
-        
+    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && sessionStorage.getItem('timetorenew') === 'true') {
         // Click the save button automatically
         const saveButton = document.getElementById('pg:frm:pb:saveButton');
         if (saveButton) {
             saveButton.click();
-            localStorage.setItem('timetorenew', 'false');
-            localStorage.setItem('timetoamendaddress', 'true');
-            
+            sessionStorage.setItem('timetorenew', 'false');
+            sessionStorage.setItem('timetoamendaddress', 'true');
         } else {
             console.log('Save button not found.');
         }
-    } else if (document.title.includes('Client file:') && localStorage.getItem('timetoamendaddress') === 'true') {
-        console.log('timetoamendaddress before navigation:', localStorage.getItem('timetoamendaddress'));
-        localStorage.setItem('timetoamendaddress', 'false');
-        let url = localStorage.getItem('url');
+    } else if (document.title.includes('Client file:') && sessionStorage.getItem('timetoamendaddress') === 'true') {
+        console.log('timetoamendaddress before navigation:', sessionStorage.getItem('timetoamendaddress'));
+        sessionStorage.setItem('timetoamendaddress', 'false');
+        let url = sessionStorage.getItem('url');
         let id = url.split('/')[3];
 
         if (url.includes("?srPos")) {
