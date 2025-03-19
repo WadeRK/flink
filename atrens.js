@@ -10,10 +10,10 @@
 
 (async function() {
     if (document.title.includes('Client file:')) {
-        localStorage.setItem('url', window.location.href)
-        url = window.location.href
-        parts = url.split('/');
-        id = parts[3];
+        localStorage.setItem('url', window.location.href);
+        let url = window.location.href;
+        let parts = url.split('/');
+        let id = parts[3];
 
         // Open file picker
         const input = document.createElement('input');
@@ -32,6 +32,7 @@
 
             // Store variables in localStorage
             localStorage.setItem('storedVariables', JSON.stringify(lines));
+            localStorage.setItem('timetorenew', 'true');
 
             const expdate = lines[3];
             const xpath = '/html/body/div/div[2]/table/tbody/tr/td[2]/div[4]/div[2]/div[3]/table/tbody/tr[4]/td[2]';
@@ -49,20 +50,30 @@
 
             if (url.includes("?srPos")) {
                 window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + url.match(/(?<=\.com\/)[^?]+(?=\?srPos)/) + '&status=Renewed';
-            }
-            else {
+            } else {
                 window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + id + '&status=Renewed';
             }
         };
         input.click();
-    } else if (window.location.href.includes('MGAClientFileStatusChangePage')) {
-        alert(window.location.href)
+    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('timetorenew') === 'true') {
         // Click the save button automatically
         const saveButton = document.getElementById('pg:frm:pb:saveButton');
         if (saveButton) {
             saveButton.click();
+            localStorage.setItem('timetorenew', 'false');
+            localStorage.setItem('timetoamendaddress', 'true');
         } else {
             console.log('Save button not found.');
+        }
+    } else if (document.title.includes('Client file:') && localStorage.getItem('timetoamendaddress') === 'true') {
+        localStorage.setItem('timetoamendaddress', 'false');
+        let url = localStorage.getItem('url');
+        let id = url.split('/')[3];
+
+        if (url.includes("?srPos")) {
+            window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileAccountChange?scontrolCaching=1&id=' + url.match(/(?<=\.com\/)[^?]+(?=\?srPos)/);
+        } else {
+            window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileAccountChange?scontrolCaching=1&id=' + id;
         }
     }
 })();
