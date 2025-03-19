@@ -12,6 +12,7 @@
     let timetorenew = localStorage.getItem('timetorenew');
     let timetoamendaddress = localStorage.getItem('timetoamendaddress');
     let url = localStorage.getItem('url');
+    alert(localStorage.getItem('timetorenew'));
     
     if (document.title.includes('Client file:')) {
         localStorage.setItem('url', window.location.href);
