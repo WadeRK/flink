@@ -57,6 +57,7 @@
         input.click();
     } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('timetorenew') === 'true') {
         // Click the save button automatically
+        alert(window.location.href)
         const saveButton = document.getElementById('pg:frm:pb:saveButton');
         if (saveButton) {
             saveButton.click();
