@@ -62,7 +62,7 @@
         };
         input.click();
     } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('timetorenew') === 1) {
-        alert(localStorage.getItem('timetorenew'));
+        alert(timetorenew);
     } else if (document.title.includes('Client file:') && localStorage.getItem('timetoamendaddress') === 'true') {
         console.log('timetoamendaddress before navigation:', localStorage.getItem('timetoamendaddress'));
         localStorage.setItem('timetoamendaddress', 'false');
