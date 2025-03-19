@@ -9,13 +9,13 @@
 // ==/UserScript==
 
 (async function() {
-    let timetorenew = localStorage.getItem('timetorenew');
-    let timetoamendaddress = localStorage.getItem('timetoamendaddress');
-    let url = localStorage.getItem('url');
-    alert(localStorage.getItem('timetorenew'));
+    let timetorenew = sessionStorage.getItem('timetorenew');
+    let timetoamendaddress = sessionStorage.getItem('timetoamendaddress');
+    let url = sessionStorage.getItem('url');
+    alert(sessionStorage.getItem('timetorenew'));
     
     if (document.title.includes('Client file:')) {
-        localStorage.setItem('url', window.location.href);
+        sessionStorage.setItem('url', window.location.href);
         url = window.location.href;
         let parts = url.split('/');
         let id = parts[3];
@@ -50,20 +50,20 @@
             }
 
             if (url.includes("?srPos")) {
-            localStorage.setItem('timetorenew', '1');
+            sessionStorage.setItem('timetorenew', '1');
                 window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + url.match(/(?<=\.com\/)[^?]+(?=\?srPos)/) + '&status=Renewed';
             } else {
-            localStorage.setItem('timetorenew', '1');
+            sessionStorage.setItem('timetorenew', '1');
                 window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + id + '&status=Renewed';
             }
         };
         input.click();
-    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('timetorenew') === '1') {
+    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && sessionStorage.getItem('timetorenew') === '1') {
         alert(timetorenew);
-    } else if (document.title.includes('Client file:') && localStorage.getItem('timetoamendaddress') === 'true') {
-        console.log('timetoamendaddress before navigation:', localStorage.getItem('timetoamendaddress'));
-        localStorage.setItem('timetoamendaddress', 'false');
-        url = localStorage.getItem('url');
+    } else if (document.title.includes('Client file:') && sessionStorage.getItem('timetoamendaddress') === 'true') {
+        console.log('timetoamendaddress before navigation:', sessionStorage.getItem('timetoamendaddress'));
+        sessionStorage.setItem('timetoamendaddress', 'false');
+        url = sessionStorage.getItem('url');
         let id = url.split('/')[3];
 
         if (url.includes("?srPos")) {
