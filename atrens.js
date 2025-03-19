@@ -9,9 +9,14 @@
 // ==/UserScript==
 
 (async function() {
+    let CloseTask = localStorage.getItem('CloseTask');
+    let timetorenew = localStorage.getItem('timetorenew');
+    let timetoamendaddress = localStorage.getItem('timetoamendaddress');
+    let url = localStorage.getItem('url');
+
     if (document.title.includes('Client file:')) {
-        sessionStorage.setItem('url', window.location.href);
-        let url = window.location.href;
+        localStorage.setItem('url', window.location.href);
+        url = window.location.href;
         let parts = url.split('/');
         let id = parts[3];
 
@@ -30,11 +35,11 @@
                 return;
             }
 
-            // Store variables in sessionStorage
-            sessionStorage.setItem('storedVariables', JSON.stringify(lines));
-            sessionStorage.setItem('timetorenew', 'true');
+            // Store variables in localStorage
+            localStorage.setItem('storedVariables', JSON.stringify(lines));
+            localStorage.setItem('timetorenew', 'true');
 
-            console.log('timetorenew:', sessionStorage.getItem('timetorenew'));
+            console.log('timetorenew:', localStorage.getItem('timetorenew'));
 
             const expdate = lines[3];
             const xpath = '/html/body/div/div[2]/table/tbody/tr/td[2]/div[4]/div[2]/div[3]/table/tbody/tr[4]/td[2]';
@@ -57,20 +62,20 @@
             }
         };
         input.click();
-    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && sessionStorage.getItem('timetorenew') === 'true') {
+    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && timetorenew === 'true') {
         // Click the save button automatically
         const saveButton = document.getElementById('pg:frm:pb:saveButton');
         if (saveButton) {
             saveButton.click();
-            sessionStorage.setItem('timetorenew', 'false');
-            sessionStorage.setItem('timetoamendaddress', 'true');
+            localStorage.setItem('timetorenew', 'false');
+            localStorage.setItem('timetoamendaddress', 'true');
         } else {
             console.log('Save button not found.');
         }
-    } else if (document.title.includes('Client file:') && sessionStorage.getItem('timetoamendaddress') === 'true') {
-        console.log('timetoamendaddress before navigation:', sessionStorage.getItem('timetoamendaddress'));
-        sessionStorage.setItem('timetoamendaddress', 'false');
-        let url = sessionStorage.getItem('url');
+    } else if (document.title.includes('Client file:') && localStorage.getItem('timetoamendaddress') === 'true') {
+        console.log('timetoamendaddress before navigation:', localStorage.getItem('timetoamendaddress'));
+        localStorage.setItem('timetoamendaddress', 'false');
+        url = localStorage.getItem('url');
         let id = url.split('/')[3];
 
         if (url.includes("?srPos")) {
