@@ -61,16 +61,8 @@
             }
         };
         input.click();
-    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && timetorenew === 1) {
-        // Click the save button automatically
-        const saveButton = document.getElementById('pg:frm:pb:saveButton');
-        if (saveButton) {
-            saveButton.click();
-            localStorage.setItem('timetorenew', 0);
-            localStorage.setItem('timetoamendaddress', 'true');
-        } else {
-            console.log('Save button not found.');
-        }
+    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('timetorenew') === 1) {
+        alert(localStorage.getItem('timetorenew'));
     } else if (document.title.includes('Client file:') && localStorage.getItem('timetoamendaddress') === 'true') {
         console.log('timetoamendaddress before navigation:', localStorage.getItem('timetoamendaddress'));
         localStorage.setItem('timetoamendaddress', 'false');
