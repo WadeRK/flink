@@ -56,6 +56,7 @@
         };
         input.click();
     } else if (window.location.href.includes('MGAClientFileStatusChangePage')) {
+        alert(window.location.href)
         // Click the save button automatically
         const saveButton = document.getElementById('pg:frm:pb:saveButton');
         if (saveButton) {
