@@ -1,13 +1,3 @@
-// ==UserScript==
-// @name         Client File Validator
-// @namespace    https://github.com/yourusername/yourrepo
-// @version      1.0
-// @description  Validate and navigate based on client file input
-// @author       You
-// @match        *://*/*
-// @grant        none
-// ==/UserScript==
-
 let timetorenew = localStorage.getItem('timetorenew');
 let timetoamendaddress = localStorage.getItem('timetoamendaddress');
 let url = localStorage.getItem('url');
