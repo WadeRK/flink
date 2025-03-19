@@ -8,7 +8,6 @@
 // @grant        none
 // ==/UserScript==
 
-
 (async function() {
     let timetorenew = localStorage.getItem('timetorenew');
     let timetoamendaddress = localStorage.getItem('timetoamendaddress');
