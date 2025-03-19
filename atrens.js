@@ -55,8 +55,13 @@
             }
         };
         input.click();
-    } else if (document.title.includes('SOME_OTHER_TITLE')) {
-        // Execute a different script logic here
-        console.log('Executing alternative logic...');
+    } else if (window.location.href.includes('MGAClientFileStatusChangePage')) {
+        // Click the save button automatically
+        const saveButton = document.getElementById('pg:frm:pb:saveButton');
+        if (saveButton) {
+            saveButton.click();
+        } else {
+            console.log('Save button not found.');
+        }
     }
 })();
