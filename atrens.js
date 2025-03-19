@@ -66,7 +66,7 @@
         const saveButton = document.getElementById('pg:frm:pb:saveButton');
         if (saveButton) {
             saveButton.click();
-            localStorage.setItem('timetorenew', 'false');
+            localStorage.setItem('timetorenew', 0);
             localStorage.setItem('timetoamendaddress', 'true');
         } else {
             console.log('Save button not found.');
