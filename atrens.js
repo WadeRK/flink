@@ -45,8 +45,12 @@
                         } else {
                             window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + id + '&status=Renewed';
                         }
-                    };
-                }
+                    }
+                };
+
+                reader.readAsText(file);
+            } else {
+                console.error('No file selected');
             }
         }
     } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('xdxd') === "1") {
