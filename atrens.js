@@ -1,4 +1,5 @@
 (async function() {
+    'use strict';
     const xdxd = localStorage.getItem('xdxd');
     timetoamendaddress = localStorage.getItem('timetoamendaddress');
     url = localStorage.getItem('url');
