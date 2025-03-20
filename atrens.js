@@ -1,4 +1,4 @@
-let timetorenew = localStorage.getItem('timetorenew');
+let xdxd = localStorage.getItem('xdxd');
 let timetoamendaddress = localStorage.getItem('timetoamendaddress');
 let url = localStorage.getItem('url');
 
@@ -37,7 +37,7 @@ let url = localStorage.getItem('url');
                 alert(`Mismatch! Expected: ${expdate}, Found: ${pageValue}`);
                 return;
             }
-localStorage.setItem('timetorenew', "1")
+localStorage.setItem('xdxd', "1")
 
             setTimeout(() => {
     if (url.includes("?srPos")) {
@@ -50,7 +50,7 @@ localStorage.setItem('timetorenew', "1")
             
         };
         input.click();
-    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('timetorenew') === "1") {
+    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('xdxd') === "1") {
         alert(timetorenew);
     } else if (document.title.includes('Client file:') && localStorage.getItem('timetoamendaddress') === 'true') {
         console.log('timetoamendaddress before navigation:', localStorage.getItem('timetoamendaddress'));
