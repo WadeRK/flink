@@ -1,4 +1,4 @@
-(async function() 
+(async function() {
     const xdxd = localStorage.getItem('xdxd');
     timetoamendaddress = localStorage.getItem('timetoamendaddress');
     url = localStorage.getItem('url');
