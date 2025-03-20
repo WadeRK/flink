@@ -50,15 +50,14 @@
             }
 
             if (url.includes("?srPos")) {
-            sessionStorage.setItem('timetorenew', '1');
                 window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + url.match(/(?<=\.com\/)[^?]+(?=\?srPos)/) + '&status=Renewed';
             } else {
-            sessionStorage.setItem('timetorenew', '1');
                 window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + id + '&status=Renewed';
             }
+            localStorage.setItem('timetorenew', 1)
         };
         input.click();
-    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && sessionStorage.getItem('timetorenew') === '1') {
+    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('timetorenew') == 1) {
         alert(timetorenew);
     } else if (document.title.includes('Client file:') && sessionStorage.getItem('timetoamendaddress') === 'true') {
         console.log('timetoamendaddress before navigation:', sessionStorage.getItem('timetoamendaddress'));
