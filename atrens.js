@@ -1,10 +1,10 @@
-let timetorenew = sessionStorage.getItem('timetorenew');
-let timetoamendaddress = sessionStorage.getItem('timetoamendaddress');
-let url = sessionStorage.getItem('url');
+let timetorenew = localStorage.getItem('timetorenew');
+let timetoamendaddress = localStorage.getItem('timetoamendaddress');
+let url = localStorage.getItem('url');
 
 (async function() {
     if (document.title.includes('Client file:')) {
-        sessionStorage.setItem('url', window.location.href);
+        localStorage.setItem('url', window.location.href);
         url = window.location.href;
         let parts = url.split('/');
         let id = parts[3];
@@ -43,15 +43,15 @@ let url = sessionStorage.getItem('url');
             } else {
                 window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + id + '&status=Renewed';
             }
-            sessionStorage.setItem('timetorenew', 1)
+            localStorage.setItem('timetorenew', 1)
         };
         input.click();
-    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && sessionStorage.getItem('timetorenew') == 1) {
+    } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('timetorenew') == 1) {
         alert(timetorenew);
-    } else if (document.title.includes('Client file:') && sessionStorage.getItem('timetoamendaddress') === 'true') {
-        console.log('timetoamendaddress before navigation:', sessionStorage.getItem('timetoamendaddress'));
-        sessionStorage.setItem('timetoamendaddress', 'false');
-        url = sessionStorage.getItem('url');
+    } else if (document.title.includes('Client file:') && localStorage.getItem('timetoamendaddress') === 'true') {
+        console.log('timetoamendaddress before navigation:', localStorage.getItem('timetoamendaddress'));
+        localStorage.setItem('timetoamendaddress', 'false');
+        url = localStorage.getItem('url');
         let id = url.split('/')[3];
 
         if (url.includes("?srPos")) {
