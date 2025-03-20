@@ -37,13 +37,17 @@ let url = localStorage.getItem('url');
                 alert(`Mismatch! Expected: ${expdate}, Found: ${pageValue}`);
                 return;
             }
+localStorage.setItem('timetorenew', "1")
 
-            if (url.includes("?srPos")) {
+            setTimeout(() => {
+    if (url.includes("?srPos")) {
                 window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + url.match(/(?<=\.com\/)[^?]+(?=\?srPos)/) + '&status=Renewed';
             } else {
                 window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + id + '&status=Renewed';
             }
-            localStorage.setItem('timetorenew', "1")
+}, 1000);
+            
+            
         };
         input.click();
     } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('timetorenew') === "1") {
