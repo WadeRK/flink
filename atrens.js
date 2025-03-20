@@ -1,6 +1,6 @@
-let xdxd = localStorage.getItem('xdxd');
-let timetoamendaddress = localStorage.getItem('timetoamendaddress');
-let url = localStorage.getItem('url');
+const xdxd = localStorage.getItem('xdxd');
+timetoamendaddress = localStorage.getItem('timetoamendaddress');
+url = localStorage.getItem('url');
 
 (async function() {
     if (document.title.includes('Client file:')) {
