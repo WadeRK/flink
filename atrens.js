@@ -5,52 +5,51 @@
     let url = localStorage.getItem('url');
 
     if (document.title.includes('Client file:')) {
-        localStorage.setItem('url', window.location.href);
-        url = window.location.href;
-        let parts = url.split('/');
-        let id = parts[3];
-
-        // Open file picker
         const input = document.createElement('input');
         input.type = 'file';
-        input.accept = 'text/plain';
-        input.onchange = async (event) => {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const text = await file.text();
-            const lines = text.split('\n').map(line => line.trim()).filter(line => line);
-            if (lines.length === 0) {
-                alert('The selected file is empty.');
-                return;
-            }
-
-            const expdate = lines[3];
-            const xpath = '/html/body/div/div[2]/table/tbody/tr/td[2]/div[4]/div[2]/div[3]/table/tbody/tr[4]/td[2]';
-            const element = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-            if (!element) {
-                alert('XPath element not found.');
-                return;
-            }
-
-            const pageValue = element.textContent.trim();
-            if (expdate !== pageValue) {
-                alert(`Mismatch! Expected: ${expdate}, Found: ${pageValue}`);
-                return;
-            }
-localStorage.setItem('xdxd', "1")
-
-            setTimeout(() => {
-    if (url.includes("?srPos")) {
-                window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + url.match(/(?<=\.com\/)[^?]+(?=\?srPos)/) + '&status=Renewed';
-            } else {
-                window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + id + '&status=Renewed';
-            }
-}, 1000);
-            
-            
-        };
+        input.style.display = 'none';
+        input.addEventListener('change', handleFileSelect, false);
+ 
+        // Append the input element to the body
+        document.body.appendChild(input);
+ 
+        // Trigger the file dialog
         input.click();
+ 
+        // Remove the input element after the file dialog is closed
+        input.addEventListener('click', function() {
+            document.body.removeChild(input);
+        }, {once: true});
+ 
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+ 
+            if (file) {
+                const reader = new FileReader();
+ 
+                reader.onload = function(e) {
+                    const content = e.target.result;
+
+                    if (content) {
+                        var url = window.location.href;
+                        var parts = url.split('/');
+                        var idWithFragment = parts[parts.length - 1]; // Get the part after the last '/'
+                        var idParts = idWithFragment.split('/'); // Split by '#' to separate the ID from the fragment
+                        //var id = idParts[0]; // Get the ID part
+                        var id = parts[3];
+                        
+                        localStorage.setItem('xdxd', "1")
+
+                        if (url.includes("?srPos")) {
+                            window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + url.match(/(?<=\.com\/)[^?]+(?=\?srPos)/) + '&status=Renewed';
+                        } else {
+                            window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + id + '&status=Renewed';
+                        }
+                    };
+                }
+            }
+        }
+    }
     } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('xdxd') === "1") {
         alert(timetorenew);
     } else if (document.title.includes('Client file:') && localStorage.getItem('timetoamendaddress') === 'true') {
