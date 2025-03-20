@@ -1,4 +1,4 @@
-(async function() {
+(function() {
     'use strict';
     let xdxd = localStorage.getItem('xdxd');
     let timetoamendaddress = localStorage.getItem('timetoamendaddress');
@@ -49,7 +49,6 @@
                 }
             }
         }
-    }
     } else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('xdxd') === "1") {
         alert(timetorenew);
     } else if (document.title.includes('Client file:') && localStorage.getItem('timetoamendaddress') === 'true') {
