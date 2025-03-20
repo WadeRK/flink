@@ -1,8 +1,8 @@
 (async function() {
     'use strict';
     const xdxd = localStorage.getItem('xdxd');
-    timetoamendaddress = localStorage.getItem('timetoamendaddress');
-    url = localStorage.getItem('url');
+    const timetoamendaddress = localStorage.getItem('timetoamendaddress');
+    const url = localStorage.getItem('url');
 
     if (document.title.includes('Client file:')) {
         localStorage.setItem('url', window.location.href);
