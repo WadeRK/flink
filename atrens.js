@@ -27,7 +27,7 @@
     let NewAmendDetails = localStorage.getItem('NewAmendDetails');
     let NewTimeToAmendDetails = localStorage.getItem('NewTimeToAmendDetails');
     let BindCheck = localStorage.getItem('BindCheck');
-alert(localStorage.getItem('RenewFile'))
+
     if (window.location.href.includes('Renewed') && localStorage.getItem('RenewFile') == 1) {
         localStorage.setItem('RenewFile', 0);
         document.querySelector("[id='pg:frm:pb:saveButton']").click();
@@ -35,6 +35,7 @@ alert(localStorage.getItem('RenewFile'))
     }
  
     else if (document.title.includes('Client file: ') && localStorage.getItem('TimeToAmendDetails') == 1) {
+     alert("here")
         localStorage.setItem('TimeToAmendDetails', 0);
         document.evaluate('//*[@id="topButtonRow"]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
         localStorage.setItem('AmendDetails', 1);
