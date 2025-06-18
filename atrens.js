@@ -252,16 +252,7 @@
         localStorage.setItem('TimeToBind', 1);
     }
  
-    else if (document.title.includes('Salesforce')) {
-        // Create and style the floating button
-        var button = document.createElement('button');
-        button.innerText = 'Atrens Renewal';
-        button.style.position = 'fixed';
-        button.style.bottom = '20px';
-        button.style.left = '20px';
-        button.style.zIndex = '1000';
-        document.body.appendChild(button);
- 
+    else if (document.title.includes('Salesforce')) { 
         // Create the file input element
         var fileInput = document.createElement('input');
         fileInput.type = 'file';
