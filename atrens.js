@@ -254,7 +254,7 @@
  
     else if (document.title.includes('Salesforce')) { 
         // Create the file input element
-        var fileInput = document.createElement('input');
+        const fileInput = document.createElement('input');
         fileInput.type = 'file';
         fileInput.style.display = 'none';
         fileInput.accept = '.txt'; // Using CSV format
