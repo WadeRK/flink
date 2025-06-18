@@ -27,7 +27,7 @@
     let NewAmendDetails = localStorage.getItem('NewAmendDetails');
     let NewTimeToAmendDetails = localStorage.getItem('NewTimeToAmendDetails');
     let BindCheck = localStorage.getItem('BindCheck');
- 
+alert(localStorage.getItem('RenewFile'))
     if (window.location.href.includes('Renewed') && localStorage.getItem('RenewFile') == 1) {
         localStorage.setItem('RenewFile', 0);
         document.querySelector("[id='pg:frm:pb:renewalProduct:j_id73']").value = "Kristy Shuk Ching Lai";
@@ -227,13 +227,13 @@
         localStorage.setItem('NewTimeToAmendDetails', 1);
     }
  
-    else if (document.title.includes('Client file: ') && localStorage.getItem('NewTimeToAmendDetails' == 1)) {
+    else if (document.title.includes('Client file: ') && localStorage.getItem('NewTimeToAmendDetails') == 1) {
         localStorage.setItem('NewTimeToAmendDetails', 0);
         document.evaluate('//*[@id="topButtonRow"]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
         localStorage.setItem('NewAmendDetails', 1);
     }
  
-    else if (window.location.href.includes('MGAClientFilePage') && localStorage.getItem('NewAmendDetails' == 1)) {
+    else if (window.location.href.includes('MGAClientFilePage') && localStorage.getItem('NewAmendDetails') == 1) {
         localStorage.setItem('NewAmendDetails', 0);
  
         values2 = parseCSV(localStorage.getItem('text2'));
