@@ -12,24 +12,23 @@
 (function() {
     'use strict';
  
-    let text = localStorage.getItem('text', '');
-    let RenewFile = localStorage.getItem('RenewFile', '');
-    let AmendDetails = localStorage.getItem('AmendDetails', '');
-    let TimeToAmendDetails = localStorage.getItem('TimeToAmendDetails', '');
-    let AmendAddress = localStorage.getItem('AmendAddress', '');
-    let TimeToAmendAddress = localStorage.getItem('TimeToAmendAddress', '');
-    let Bind = localStorage.getItem('Bind', '');
-    let TimeToBind = localStorage.getItem('TimeToBind', '');
-    let TimeToCreateFile = localStorage.getItem('TimeToCreateFile', '');
-    let Search1Results = localStorage.getItem('Search1Results', '');
-    let Search2Results = localStorage.getItem('Search2Results', '');
-    let CreateFile = localStorage.getItem('CreateFile', '');
-    let NewAmendDetails = localStorage.getItem('NewAmendDetails', '');
-    let NewTimeToAmendDetails = localStorage.getItem('NewTimeToAmendDetails', '');
-    let BindCheck = localStorage.getItem('BindCheck', '');
- 
+    let text = localStorage.getItem('text');
+    let RenewFile = localStorage.getItem('RenewFile');
+    let AmendDetails = localStorage.getItem('AmendDetails');
+    let TimeToAmendDetails = localStorage.getItem('TimeToAmendDetails');
+    let AmendAddress = localStorage.getItem('AmendAddress');
+    let TimeToAmendAddress = localStorage.getItem('TimeToAmendAddress');
+    let Bind = localStorage.getItem('Bind');
+    let TimeToBind = localStorage.getItem('TimeToBind');
+    let TimeToCreateFile = localStorage.getItem('TimeToCreateFile');
+    let Search1Results = localStorage.getItem('Search1Results');
+    let Search2Results = localStorage.getItem('Search2Results');
+    let CreateFile = localStorage.getItem('CreateFile');
+    let NewAmendDetails = localStorage.getItem('NewAmendDetails');
+    let NewTimeToAmendDetails = localStorage.getItem('NewTimeToAmendDetails');
+    let BindCheck = localStorage.getItem('BindCheck');
+ alert(localStorage.getItem('RenewFile'))
     if (window.location.href.includes('Renewed') && RenewFile == 1) {
-     alert("test")
         localStorage.setItem('RenewFile', 0);
         document.querySelector("[id='pg:frm:pb:renewalProduct:j_id73']").value = "Kristy Shuk Ching Lai";
         document.querySelector("[id='pg:frm:pb:saveButton']").click();
@@ -255,7 +254,7 @@
  
     else if (document.title.includes('Salesforce')) { 
         // Create the file input element
-        const fileInput = document.createElement('input');
+        var fileInput = document.createElement('input');
         fileInput.type = 'file';
         fileInput.style.display = 'none';
         fileInput.accept = '.txt'; // Using CSV format
