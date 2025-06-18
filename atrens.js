@@ -5,46 +5,46 @@
 // @description  Populates fields from a selected spreadsheet and cross-checks values
 // @author       Your Name
 // @match        *://*/*
-// @grant        sessionStorage.setItem
-// @grant        sessionStorage.getItem
+// @grant        GM_setValue
+// @grant        GM_getValue
 // ==/UserScript==
  
 (function() {
     'use strict';
  
-    let text = sessionStorage.getItem('text');
-    let RenewFile = sessionStorage.getItem('RenewFile');
-    let AmendDetails = sessionStorage.getItem('AmendDetails');
-    let TimeToAmendDetails = sessionStorage.getItem('TimeToAmendDetails');
-    let AmendAddress = sessionStorage.getItem('AmendAddress');
-    let TimeToAmendAddress = sessionStorage.getItem('TimeToAmendAddress');
-    let Bind = sessionStorage.getItem('Bind');
-    let TimeToBind = sessionStorage.getItem('TimeToBind');
-    let TimeToCreateFile = sessionStorage.getItem('TimeToCreateFile');
-    let Search1Results = sessionStorage.getItem('Search1Results');
-    let Search2Results = sessionStorage.getItem('Search2Results');
-    let CreateFile = sessionStorage.getItem('CreateFile');
-    let NewAmendDetails = sessionStorage.getItem('NewAmendDetails');
-    let NewTimeToAmendDetails = sessionStorage.getItem('NewTimeToAmendDetails');
-    let BindCheck = sessionStorage.getItem('BindCheck');
-
-    if (window.location.href.includes('Renewed') && sessionStorage.getItem('RenewFile') == 1) {
-        sessionStorage.setItem('RenewFile', 0);
+    let text = GM_getValue('text', '');
+    let RenewFile = GM_getValue('RenewFile', '');
+    let AmendDetails = GM_getValue('AmendDetails', '');
+    let TimeToAmendDetails = GM_getValue('TimeToAmendDetails', '');
+    let AmendAddress = GM_getValue('AmendAddress', '');
+    let TimeToAmendAddress = GM_getValue('TimeToAmendAddress', '');
+    let Bind = GM_getValue('Bind', '');
+    let TimeToBind = GM_getValue('TimeToBind', '');
+    let TimeToCreateFile = GM_getValue('TimeToCreateFile', '');
+    let Search1Results = GM_getValue('Search1Results', '');
+    let Search2Results = GM_getValue('Search2Results', '');
+    let CreateFile = GM_getValue('CreateFile', '');
+    let NewAmendDetails = GM_getValue('NewAmendDetails', '');
+    let NewTimeToAmendDetails = GM_getValue('NewTimeToAmendDetails', '');
+    let BindCheck = GM_getValue('BindCheck', '');
+ 
+    if (window.location.href.includes('Renewed') && RenewFile == 1) {
+        GM_setValue('RenewFile', 0);
+        document.querySelector("[id='pg:frm:pb:renewalProduct:j_id73']").value = "Kristy Shuk Ching Lai";
         document.querySelector("[id='pg:frm:pb:saveButton']").click();
-        sessionStorage.setItem('TimeToAmendDetails', 1);
+        GM_setValue('TimeToAmendDetails', 1);
     }
  
-    else if (document.title.includes('Client file: ') && sessionStorage.getItem('TimeToAmendDetails') == 1) {
-     alert("here")
-        sessionStorage.setItem('TimeToAmendDetails', 0);
+    else if (document.title.includes('Client file: ') && TimeToAmendDetails == 1) {
+        GM_setValue('TimeToAmendDetails', 0);
         document.evaluate('//*[@id="topButtonRow"]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
-        sessionStorage.setItem('AmendDetails', 1);
+        GM_setValue('AmendDetails', 1);
     }
  
-    else if (window.location.href.includes('MGAClientFilePage') && sessionStorage.getItem('AmendDetails') == 1) {
-        sessionStorage.setItem('AmendDetails', 0);
+    else if (window.location.href.includes('MGAClientFilePage') && AmendDetails == 1) {
+        GM_setValue('AmendDetails', 0);
  
-        var values = parseCSV(sessionStorage.getItem('text'));
+        var values = parseCSV(GM_getValue('text'));
  
         // Populate fields
         document.querySelector("[id='j_id0:j_id5:j_id14:j_id394:j_id415']").value = values[13][0];
@@ -68,21 +68,20 @@
  
         if (ThereIsAnError !== "1") {
             document.querySelector("[id='j_id0:j_id5:j_id14:j_id15:save']").click();
-            //sessionStorage.setItem('TimeToAmendAddress', 1);
-            sessionStorage.setItem('TimeToBind', 1);
+            GM_setValue('TimeToAmendAddress', 1);
         }
     }
  
-    else if (document.title.includes('Client file: ') && sessionStorage.getItem('TimeToAmendAddress') == 1) {
-        sessionStorage.setItem('TimeToAmendAddress', 0);
+    else if (document.title.includes('Client file: ') && TimeToAmendAddress == 1) {
+        GM_setValue('TimeToAmendAddress', 0);
         document.evaluate('//*[@id="topButtonRow"]/input[4]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
-        sessionStorage.setItem('AmendAddress', 1);
+        GM_setValue('AmendAddress', 1);
     }
  
-    else if (window.location.href.includes('MGAClientFileAccountChange') && sessionStorage.getItem('TimeToAmendAddress') == 1) {
-        sessionStorage.setItem('AmendAddress', 0);
+    else if (window.location.href.includes('MGAClientFileAccountChange') && AmendAddress == 1) {
+        GM_setValue('AmendAddress', 0);
  
-        values = parseCSV(sessionStorage.getItem('text'));
+        values = parseCSV(GM_getValue('text'));
  
         // Populate fields
         document.querySelector("[id='pg:pb:frm:j_id62:pca_street']").value = toTitleCase(values[7][0]);
@@ -118,11 +117,11 @@
             }
         }, 1000); // Check every 1 second
  
-        sessionStorage.setItem('TimeToBind', 1);
+        GM_setValue('TimeToBind', 1);
     }
  
-    else if (document.title.includes('Client file: ') && sessionStorage.getItem('TimeToBind') == 1) {
-        sessionStorage.setItem('TimeToBind', 0);
+    else if (document.title.includes('Client file: ') && TimeToBind == 1) {
+        GM_setValue('TimeToBind', 0);
         var url = window.location.href;
         var parts = url.split('/');
         var idWithFragment = parts[parts.length - 1]; // Get the part after the last '/'
@@ -131,11 +130,11 @@
         var id = parts[3];
         window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + id + '&status=Bound';
  
-        sessionStorage.setItem('Bind', 1);
+        GM_setValue('Bind', 1);
     }
  
-    else if (window.location.href.includes('MGAClientFileStatusChangePage') && sessionStorage.getItem('Bind') == 1) {
-        sessionStorage.setItem('Bind', 0);
+    else if (window.location.href.includes('MGAClientFileStatusChangePage') && Bind == 1) {
+        GM_setValue('Bind', 0);
  
         var today = new Date();
  
@@ -159,25 +158,25 @@
                 clearInterval(interval); // Stop checking
                 if (!document.title.includes('Client file: ')) {
                     window.location.reload();
-                    sessionStorage.setItem('Bind', 1);
+                    GM_setValue('Bind', 1);
                 }
             }
         }, 500); // Check every 500ms
     }
  
  
-    else if (document.title.includes('Search Results') && sessionStorage.getItem('Search1Results') == 1) {
-        sessionStorage.setItem('Search1Results', 0);
+    else if (document.title.includes('Search Results') && Search1Results == 1) {
+        GM_setValue('Search1Results', 0);
  
         let exists = document.body.textContent.includes("There are no matching");
  
         if (exists) {
-            var values2 = parseCSV(sessionStorage.getItem('text2'));
+            var values2 = parseCSV(GM_getValue('text2'));
             let name = values2[3][0];
             let updatedName = name.replace(/\s+/g, ' ').trim().replace(/(\d+)$/, 'No. $1');
             document.getElementById("_sbstr").value = updatedName;
             document.evaluate('/html/body/div/div[2]/table/tbody/tr/td[2]/div[2]/form/div[3]/div/span/div/input[2]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
-            sessionStorage.setItem('Search2Results', 1);
+            GM_setValue('Search2Results', 1);
         }
  
         else {
@@ -185,20 +184,20 @@
         }
     }
  
-    else if (document.title.includes('Search Results') && sessionStorage.getItem('Search2Results') == 1) {
-        sessionStorage.setItem('Search2Results', 0);
+    else if (document.title.includes('Search Results') && Search2Results == 1) {
+        GM_setValue('Search2Results', 0);
  
         let exists = document.body.textContent.includes("There are no matching");
  
         if (exists) {
             window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFilePage?retURL=%2Fa1D%2Fo&save_new=1&sfdc.override=1';
-            sessionStorage.setItem('CreateFile', 1);
+            GM_setValue('CreateFile', 1);
         }
     }
  
-    else if (document.title.includes('Salesforce - Enterprise Edition') && sessionStorage.getItem('CreateFile') == 1) {
-        sessionStorage.setItem('CreateFile', 0);
-        values2 = parseCSV(sessionStorage.getItem('text2'));
+    else if (document.title.includes('Salesforce - Enterprise Edition') && CreateFile == 1) {
+        GM_setValue('CreateFile', 0);
+        values2 = parseCSV(GM_getValue('text2'));
  
         document.getElementById("j_id0:j_id5:j_id14:j_id67:j_id68:insurance_product").value = "a1KOO00000BG3d82AD";
         document.querySelector("[id='j_id0:j_id5:j_id14:j_id67:j_id86']").value = "Kristy Lai";
@@ -225,19 +224,19 @@
         document.getElementById("j_id0:j_id5:j_id14:j_id146:pca_countrynonbroker").value = "Canada";
         document.getElementById("j_id0:j_id5:j_id14:brokerArea:existingbroker").value = "Atrens-Counsel Insurance Brkrs";
  
-        sessionStorage.setItem('NewTimeToAmendDetails', 1);
+        GM_setValue('NewTimeToAmendDetails', 1);
     }
  
-    else if (document.title.includes('Client file: ') && sessionStorage.getItem('NewTimeToAmendDetails') == 1) {
-        sessionStorage.setItem('NewTimeToAmendDetails', 0);
+    else if (document.title.includes('Client file: ') && NewTimeToAmendDetails == 1) {
+        GM_setValue('NewTimeToAmendDetails', 0);
         document.evaluate('//*[@id="topButtonRow"]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
-        sessionStorage.setItem('NewAmendDetails', 1);
+        GM_setValue('NewAmendDetails', 1);
     }
  
-    else if (window.location.href.includes('MGAClientFilePage') && sessionStorage.getItem('NewAmendDetails') == 1) {
-        sessionStorage.setItem('NewAmendDetails', 0);
+    else if (window.location.href.includes('MGAClientFilePage') && NewAmendDetails == 1) {
+        GM_setValue('NewAmendDetails', 0);
  
-        values2 = parseCSV(sessionStorage.getItem('text2'));
+        values2 = parseCSV(GM_getValue('text2'));
  
         // Populate fields
         document.querySelector("[id='j_id0:j_id5:j_id14:j_id394:j_id415']").value = values2[13][0];
@@ -250,16 +249,29 @@
         document.querySelector("[id='j_id0:j_id5:j_id14:j_id429:j_id437']").value = values2[6][0];
  
         document.querySelector("[id='j_id0:j_id5:j_id14:j_id15:save']").click();
-        sessionStorage.setItem('TimeToBind', 1);
+        GM_setValue('TimeToBind', 1);
     }
  
-    else if (document.title.includes('Salesforce')) { 
+    else if (document.title.includes('Salesforce')) {
+        // Create and style the floating button
+        var button = document.createElement('button');
+        button.innerText = 'Atrens Renewal';
+        button.style.position = 'fixed';
+        button.style.bottom = '20px';
+        button.style.left = '20px';
+        button.style.zIndex = '1000';
+        document.body.appendChild(button);
+ 
         // Create the file input element
-        const fileInput = document.createElement('input');
+        var fileInput = document.createElement('input');
         fileInput.type = 'file';
         fileInput.style.display = 'none';
         fileInput.accept = '.txt'; // Using CSV format
-        fileInput.click();
+        document.body.appendChild(fileInput);
+ 
+        button.addEventListener('click', function() {
+            fileInput.click();
+        });
  
         fileInput.addEventListener('change', function(event) {
             var file = event.target.files[0];
@@ -267,7 +279,7 @@
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     var text = e.target.result;
-                    sessionStorage.setItem('text', text);
+                    GM_setValue('text', text);
  
                     var url = window.location.href;
                     var parts = url.split('/');
@@ -276,7 +288,7 @@
                     //var id = idParts[0]; // Get the ID part
                     var id = parts[3];
  
-                    var values = parseCSV(sessionStorage.getItem('text'));
+                    var values = parseCSV(GM_getValue('text'));
  
                     var mismatchMsg = "";
                     var policyExpiryDateXpath = document.evaluate('/html/body/div/div[2]/table/tbody/tr/td[2]/div[4]/div[2]/div[3]/table/tbody/tr[4]/td[2]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
@@ -289,7 +301,6 @@
                     }
  
                     if (ThereIsAnError !== "1") {
-                    sessionStorage.setItem('RenewFile', 1);
                         if (url.includes("?srPos")) {
                             window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + url.match(/(?<=\.com\/)[^?]+(?=\?srPos)/) + '&status=Renewed';
                         }
@@ -300,9 +311,48 @@
                         else {
                             window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + id + '&status=Renewed';
                         }
+                        GM_setValue('RenewFile', 1);
                     }
                 };
                 reader.readAsText(file);
+            }
+        });
+ 
+        var button2 = document.createElement('button');
+        button2.innerText = 'Atrens New';
+        button2.style.position = 'fixed';
+        button2.style.bottom = '50px';
+        button2.style.left = '20px';
+        button2.style.zIndex = '1000';
+        document.body.appendChild(button2);
+ 
+        // Create the file input element
+        var fileInput2 = document.createElement('input');
+        fileInput2.type = 'file';
+        fileInput2.style.display = 'none';
+        fileInput2.accept = '.txt'; // Using CSV format
+        document.body.appendChild(fileInput2);
+ 
+        button2.addEventListener('click', function() {
+            fileInput2.click();
+        });
+ 
+        fileInput2.addEventListener('change', function(event2) {
+            var file2 = event2.target.files[0];
+            if (file2) {
+                var reader2 = new FileReader();
+                reader2.onload = function(e) {
+                    var text2 = e.target.result;
+                    GM_setValue('text2', text2);
+ 
+                    var values2 = parseCSV(GM_getValue('text2'));
+ 
+                    document.getElementById("sbstr").value = values2[1][0];
+                    document.evaluate('/html/body/div/div[2]/table/tbody/tr/td[1]/div/div[1]/form/div[2]/div[1]/input[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
+                    GM_setValue('Search1Results', 1);
+ 
+                };
+                reader2.readAsText(file2);
             }
         });
     }
