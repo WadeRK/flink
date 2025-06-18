@@ -227,13 +227,13 @@
         localStorage.setItem('NewTimeToAmendDetails', 1);
     }
  
-    else if (document.title.includes('Client file: ') &&  localStorage.getItem('NewTimeToAmendDetails' == 1) {
+    else if (document.title.includes('Client file: ') && localStorage.getItem('NewTimeToAmendDetails' == 1)) {
         localStorage.setItem('NewTimeToAmendDetails', 0);
         document.evaluate('//*[@id="topButtonRow"]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
         localStorage.setItem('NewAmendDetails', 1);
     }
  
-    else if (window.location.href.includes('MGAClientFilePage') &&  localStorage.getItem('NewAmendDetails' == 1) {
+    else if (window.location.href.includes('MGAClientFilePage') && localStorage.getItem('NewAmendDetails' == 1)) {
         localStorage.setItem('NewAmendDetails', 0);
  
         values2 = parseCSV(localStorage.getItem('text2'));
