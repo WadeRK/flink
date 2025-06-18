@@ -27,21 +27,21 @@
     let NewAmendDetails = localStorage.getItem('NewAmendDetails');
     let NewTimeToAmendDetails = localStorage.getItem('NewTimeToAmendDetails');
     let BindCheck = localStorage.getItem('BindCheck');
- alert(localStorage.getItem('RenewFile'))
-    if (window.location.href.includes('Renewed') && RenewFile == 1) {
+ 
+    if (window.location.href.includes('Renewed') && localStorage.getItem('RenewFile') == 1) {
         localStorage.setItem('RenewFile', 0);
         document.querySelector("[id='pg:frm:pb:renewalProduct:j_id73']").value = "Kristy Shuk Ching Lai";
         document.querySelector("[id='pg:frm:pb:saveButton']").click();
         localStorage.setItem('TimeToAmendDetails', 1);
     }
  
-    else if (document.title.includes('Client file: ') && TimeToAmendDetails == 1) {
+    else if (document.title.includes('Client file: ') && localStorage.getItem('TimeToAmendDetails') == 1) {
         localStorage.setItem('TimeToAmendDetails', 0);
         document.evaluate('//*[@id="topButtonRow"]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
         localStorage.setItem('AmendDetails', 1);
     }
  
-    else if (window.location.href.includes('MGAClientFilePage') && AmendDetails == 1) {
+    else if (window.location.href.includes('MGAClientFilePage') && localStorage.getItem('AmendDetails') == 1) {
         localStorage.setItem('AmendDetails', 0);
  
         var values = parseCSV(localStorage.getItem('text'));
@@ -72,13 +72,13 @@
         }
     }
  
-    else if (document.title.includes('Client file: ') && TimeToAmendAddress == 1) {
+    else if (document.title.includes('Client file: ') && localStorage.getItem('TimeToAmendAddress') == 1) {
         localStorage.setItem('TimeToAmendAddress', 0);
         document.evaluate('//*[@id="topButtonRow"]/input[4]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
         localStorage.setItem('AmendAddress', 1);
     }
  
-    else if (window.location.href.includes('MGAClientFileAccountChange') && AmendAddress == 1) {
+    else if (window.location.href.includes('MGAClientFileAccountChange') && localStorage.getItem('TimeToAmendAddress') == 1) {
         localStorage.setItem('AmendAddress', 0);
  
         values = parseCSV(localStorage.getItem('text'));
@@ -120,7 +120,7 @@
         localStorage.setItem('TimeToBind', 1);
     }
  
-    else if (document.title.includes('Client file: ') && TimeToBind == 1) {
+    else if (document.title.includes('Client file: ') && localStorage.getItem('TimeToBind') == 1) {
         localStorage.setItem('TimeToBind', 0);
         var url = window.location.href;
         var parts = url.split('/');
@@ -133,7 +133,7 @@
         localStorage.setItem('Bind', 1);
     }
  
-    else if (window.location.href.includes('MGAClientFileStatusChangePage') && Bind == 1) {
+    else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('Bind') == 1) {
         localStorage.setItem('Bind', 0);
  
         var today = new Date();
@@ -165,7 +165,7 @@
     }
  
  
-    else if (document.title.includes('Search Results') && Search1Results == 1) {
+    else if (document.title.includes('Search Results') && localStorage.getItem('Search1Results') == 1) {
         localStorage.setItem('Search1Results', 0);
  
         let exists = document.body.textContent.includes("There are no matching");
@@ -184,7 +184,7 @@
         }
     }
  
-    else if (document.title.includes('Search Results') && Search2Results == 1) {
+    else if (document.title.includes('Search Results') && localStorage.getItem('Search2Results') == 1) {
         localStorage.setItem('Search2Results', 0);
  
         let exists = document.body.textContent.includes("There are no matching");
@@ -195,7 +195,7 @@
         }
     }
  
-    else if (document.title.includes('Salesforce - Enterprise Edition') && CreateFile == 1) {
+    else if (document.title.includes('Salesforce - Enterprise Edition') && localStorage.getItem('CreateFile') == 1) {
         localStorage.setItem('CreateFile', 0);
         values2 = parseCSV(localStorage.getItem('text2'));
  
@@ -227,13 +227,13 @@
         localStorage.setItem('NewTimeToAmendDetails', 1);
     }
  
-    else if (document.title.includes('Client file: ') && NewTimeToAmendDetails == 1) {
+    else if (document.title.includes('Client file: ') &&  localStorage.getItem('NewTimeToAmendDetails' == 1) {
         localStorage.setItem('NewTimeToAmendDetails', 0);
         document.evaluate('//*[@id="topButtonRow"]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
         localStorage.setItem('NewAmendDetails', 1);
     }
  
-    else if (window.location.href.includes('MGAClientFilePage') && NewAmendDetails == 1) {
+    else if (window.location.href.includes('MGAClientFilePage') &&  localStorage.getItem('NewAmendDetails' == 1) {
         localStorage.setItem('NewAmendDetails', 0);
  
         values2 = parseCSV(localStorage.getItem('text2'));
