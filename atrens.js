@@ -5,46 +5,46 @@
 // @description  Populates fields from a selected spreadsheet and cross-checks values
 // @author       Your Name
 // @match        *://*/*
-// @grant        localStorage.setItem
-// @grant        localStorage.getItem
+// @grant        sessionStorage.setItem
+// @grant        sessionStorage.getItem
 // ==/UserScript==
  
 (function() {
     'use strict';
  
-    let text = localStorage.getItem('text');
-    let RenewFile = localStorage.getItem('RenewFile');
-    let AmendDetails = localStorage.getItem('AmendDetails');
-    let TimeToAmendDetails = localStorage.getItem('TimeToAmendDetails');
-    let AmendAddress = localStorage.getItem('AmendAddress');
-    let TimeToAmendAddress = localStorage.getItem('TimeToAmendAddress');
-    let Bind = localStorage.getItem('Bind');
-    let TimeToBind = localStorage.getItem('TimeToBind');
-    let TimeToCreateFile = localStorage.getItem('TimeToCreateFile');
-    let Search1Results = localStorage.getItem('Search1Results');
-    let Search2Results = localStorage.getItem('Search2Results');
-    let CreateFile = localStorage.getItem('CreateFile');
-    let NewAmendDetails = localStorage.getItem('NewAmendDetails');
-    let NewTimeToAmendDetails = localStorage.getItem('NewTimeToAmendDetails');
-    let BindCheck = localStorage.getItem('BindCheck');
+    let text = sessionStorage.getItem('text');
+    let RenewFile = sessionStorage.getItem('RenewFile');
+    let AmendDetails = sessionStorage.getItem('AmendDetails');
+    let TimeToAmendDetails = sessionStorage.getItem('TimeToAmendDetails');
+    let AmendAddress = sessionStorage.getItem('AmendAddress');
+    let TimeToAmendAddress = sessionStorage.getItem('TimeToAmendAddress');
+    let Bind = sessionStorage.getItem('Bind');
+    let TimeToBind = sessionStorage.getItem('TimeToBind');
+    let TimeToCreateFile = sessionStorage.getItem('TimeToCreateFile');
+    let Search1Results = sessionStorage.getItem('Search1Results');
+    let Search2Results = sessionStorage.getItem('Search2Results');
+    let CreateFile = sessionStorage.getItem('CreateFile');
+    let NewAmendDetails = sessionStorage.getItem('NewAmendDetails');
+    let NewTimeToAmendDetails = sessionStorage.getItem('NewTimeToAmendDetails');
+    let BindCheck = sessionStorage.getItem('BindCheck');
 
-    if (window.location.href.includes('Renewed') && localStorage.getItem('RenewFile') == 1) {
-        localStorage.setItem('RenewFile', 0);
+    if (window.location.href.includes('Renewed') && sessionStorage.getItem('RenewFile') == 1) {
+        sessionStorage.setItem('RenewFile', 0);
         document.querySelector("[id='pg:frm:pb:saveButton']").click();
-        localStorage.setItem('TimeToAmendDetails', 1);
+        sessionStorage.setItem('TimeToAmendDetails', 1);
     }
  
-    else if (document.title.includes('Client file: ') && localStorage.getItem('TimeToAmendDetails') == 1) {
+    else if (document.title.includes('Client file: ') && sessionStorage.getItem('TimeToAmendDetails') == 1) {
      alert("here")
-        localStorage.setItem('TimeToAmendDetails', 0);
+        sessionStorage.setItem('TimeToAmendDetails', 0);
         document.evaluate('//*[@id="topButtonRow"]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
-        localStorage.setItem('AmendDetails', 1);
+        sessionStorage.setItem('AmendDetails', 1);
     }
  
-    else if (window.location.href.includes('MGAClientFilePage') && localStorage.getItem('AmendDetails') == 1) {
-        localStorage.setItem('AmendDetails', 0);
+    else if (window.location.href.includes('MGAClientFilePage') && sessionStorage.getItem('AmendDetails') == 1) {
+        sessionStorage.setItem('AmendDetails', 0);
  
-        var values = parseCSV(localStorage.getItem('text'));
+        var values = parseCSV(sessionStorage.getItem('text'));
  
         // Populate fields
         document.querySelector("[id='j_id0:j_id5:j_id14:j_id394:j_id415']").value = values[13][0];
@@ -68,21 +68,21 @@
  
         if (ThereIsAnError !== "1") {
             document.querySelector("[id='j_id0:j_id5:j_id14:j_id15:save']").click();
-            //localStorage.setItem('TimeToAmendAddress', 1);
-            localStorage.setItem('TimeToBind', 1);
+            //sessionStorage.setItem('TimeToAmendAddress', 1);
+            sessionStorage.setItem('TimeToBind', 1);
         }
     }
  
-    else if (document.title.includes('Client file: ') && localStorage.getItem('TimeToAmendAddress') == 1) {
-        localStorage.setItem('TimeToAmendAddress', 0);
+    else if (document.title.includes('Client file: ') && sessionStorage.getItem('TimeToAmendAddress') == 1) {
+        sessionStorage.setItem('TimeToAmendAddress', 0);
         document.evaluate('//*[@id="topButtonRow"]/input[4]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
-        localStorage.setItem('AmendAddress', 1);
+        sessionStorage.setItem('AmendAddress', 1);
     }
  
-    else if (window.location.href.includes('MGAClientFileAccountChange') && localStorage.getItem('TimeToAmendAddress') == 1) {
-        localStorage.setItem('AmendAddress', 0);
+    else if (window.location.href.includes('MGAClientFileAccountChange') && sessionStorage.getItem('TimeToAmendAddress') == 1) {
+        sessionStorage.setItem('AmendAddress', 0);
  
-        values = parseCSV(localStorage.getItem('text'));
+        values = parseCSV(sessionStorage.getItem('text'));
  
         // Populate fields
         document.querySelector("[id='pg:pb:frm:j_id62:pca_street']").value = toTitleCase(values[7][0]);
@@ -118,11 +118,11 @@
             }
         }, 1000); // Check every 1 second
  
-        localStorage.setItem('TimeToBind', 1);
+        sessionStorage.setItem('TimeToBind', 1);
     }
  
-    else if (document.title.includes('Client file: ') && localStorage.getItem('TimeToBind') == 1) {
-        localStorage.setItem('TimeToBind', 0);
+    else if (document.title.includes('Client file: ') && sessionStorage.getItem('TimeToBind') == 1) {
+        sessionStorage.setItem('TimeToBind', 0);
         var url = window.location.href;
         var parts = url.split('/');
         var idWithFragment = parts[parts.length - 1]; // Get the part after the last '/'
@@ -131,11 +131,11 @@
         var id = parts[3];
         window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + id + '&status=Bound';
  
-        localStorage.setItem('Bind', 1);
+        sessionStorage.setItem('Bind', 1);
     }
  
-    else if (window.location.href.includes('MGAClientFileStatusChangePage') && localStorage.getItem('Bind') == 1) {
-        localStorage.setItem('Bind', 0);
+    else if (window.location.href.includes('MGAClientFileStatusChangePage') && sessionStorage.getItem('Bind') == 1) {
+        sessionStorage.setItem('Bind', 0);
  
         var today = new Date();
  
@@ -159,25 +159,25 @@
                 clearInterval(interval); // Stop checking
                 if (!document.title.includes('Client file: ')) {
                     window.location.reload();
-                    localStorage.setItem('Bind', 1);
+                    sessionStorage.setItem('Bind', 1);
                 }
             }
         }, 500); // Check every 500ms
     }
  
  
-    else if (document.title.includes('Search Results') && localStorage.getItem('Search1Results') == 1) {
-        localStorage.setItem('Search1Results', 0);
+    else if (document.title.includes('Search Results') && sessionStorage.getItem('Search1Results') == 1) {
+        sessionStorage.setItem('Search1Results', 0);
  
         let exists = document.body.textContent.includes("There are no matching");
  
         if (exists) {
-            var values2 = parseCSV(localStorage.getItem('text2'));
+            var values2 = parseCSV(sessionStorage.getItem('text2'));
             let name = values2[3][0];
             let updatedName = name.replace(/\s+/g, ' ').trim().replace(/(\d+)$/, 'No. $1');
             document.getElementById("_sbstr").value = updatedName;
             document.evaluate('/html/body/div/div[2]/table/tbody/tr/td[2]/div[2]/form/div[3]/div/span/div/input[2]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
-            localStorage.setItem('Search2Results', 1);
+            sessionStorage.setItem('Search2Results', 1);
         }
  
         else {
@@ -185,20 +185,20 @@
         }
     }
  
-    else if (document.title.includes('Search Results') && localStorage.getItem('Search2Results') == 1) {
-        localStorage.setItem('Search2Results', 0);
+    else if (document.title.includes('Search Results') && sessionStorage.getItem('Search2Results') == 1) {
+        sessionStorage.setItem('Search2Results', 0);
  
         let exists = document.body.textContent.includes("There are no matching");
  
         if (exists) {
             window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFilePage?retURL=%2Fa1D%2Fo&save_new=1&sfdc.override=1';
-            localStorage.setItem('CreateFile', 1);
+            sessionStorage.setItem('CreateFile', 1);
         }
     }
  
-    else if (document.title.includes('Salesforce - Enterprise Edition') && localStorage.getItem('CreateFile') == 1) {
-        localStorage.setItem('CreateFile', 0);
-        values2 = parseCSV(localStorage.getItem('text2'));
+    else if (document.title.includes('Salesforce - Enterprise Edition') && sessionStorage.getItem('CreateFile') == 1) {
+        sessionStorage.setItem('CreateFile', 0);
+        values2 = parseCSV(sessionStorage.getItem('text2'));
  
         document.getElementById("j_id0:j_id5:j_id14:j_id67:j_id68:insurance_product").value = "a1KOO00000BG3d82AD";
         document.querySelector("[id='j_id0:j_id5:j_id14:j_id67:j_id86']").value = "Kristy Lai";
@@ -225,19 +225,19 @@
         document.getElementById("j_id0:j_id5:j_id14:j_id146:pca_countrynonbroker").value = "Canada";
         document.getElementById("j_id0:j_id5:j_id14:brokerArea:existingbroker").value = "Atrens-Counsel Insurance Brkrs";
  
-        localStorage.setItem('NewTimeToAmendDetails', 1);
+        sessionStorage.setItem('NewTimeToAmendDetails', 1);
     }
  
-    else if (document.title.includes('Client file: ') && localStorage.getItem('NewTimeToAmendDetails') == 1) {
-        localStorage.setItem('NewTimeToAmendDetails', 0);
+    else if (document.title.includes('Client file: ') && sessionStorage.getItem('NewTimeToAmendDetails') == 1) {
+        sessionStorage.setItem('NewTimeToAmendDetails', 0);
         document.evaluate('//*[@id="topButtonRow"]/input[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
-        localStorage.setItem('NewAmendDetails', 1);
+        sessionStorage.setItem('NewAmendDetails', 1);
     }
  
-    else if (window.location.href.includes('MGAClientFilePage') && localStorage.getItem('NewAmendDetails') == 1) {
-        localStorage.setItem('NewAmendDetails', 0);
+    else if (window.location.href.includes('MGAClientFilePage') && sessionStorage.getItem('NewAmendDetails') == 1) {
+        sessionStorage.setItem('NewAmendDetails', 0);
  
-        values2 = parseCSV(localStorage.getItem('text2'));
+        values2 = parseCSV(sessionStorage.getItem('text2'));
  
         // Populate fields
         document.querySelector("[id='j_id0:j_id5:j_id14:j_id394:j_id415']").value = values2[13][0];
@@ -250,7 +250,7 @@
         document.querySelector("[id='j_id0:j_id5:j_id14:j_id429:j_id437']").value = values2[6][0];
  
         document.querySelector("[id='j_id0:j_id5:j_id14:j_id15:save']").click();
-        localStorage.setItem('TimeToBind', 1);
+        sessionStorage.setItem('TimeToBind', 1);
     }
  
     else if (document.title.includes('Salesforce')) { 
@@ -267,7 +267,7 @@
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     var text = e.target.result;
-                    localStorage.setItem('text', text);
+                    sessionStorage.setItem('text', text);
  
                     var url = window.location.href;
                     var parts = url.split('/');
@@ -276,7 +276,7 @@
                     //var id = idParts[0]; // Get the ID part
                     var id = parts[3];
  
-                    var values = parseCSV(localStorage.getItem('text'));
+                    var values = parseCSV(sessionStorage.getItem('text'));
  
                     var mismatchMsg = "";
                     var policyExpiryDateXpath = document.evaluate('/html/body/div/div[2]/table/tbody/tr/td[2]/div[4]/div[2]/div[3]/table/tbody/tr[4]/td[2]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
@@ -289,7 +289,7 @@
                     }
  
                     if (ThereIsAnError !== "1") {
-                    localStorage.setItem('RenewFile', 1);
+                    sessionStorage.setItem('RenewFile', 1);
                         if (url.includes("?srPos")) {
                             window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + url.match(/(?<=\.com\/)[^?]+(?=\?srPos)/) + '&status=Renewed';
                         }
