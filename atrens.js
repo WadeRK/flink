@@ -29,6 +29,7 @@
     let BindCheck = localStorage.getItem('BindCheck', '');
  
     if (window.location.href.includes('Renewed') && RenewFile == 1) {
+     alert("test")
         localStorage.setItem('RenewFile', 0);
         document.querySelector("[id='pg:frm:pb:renewalProduct:j_id73']").value = "Kristy Shuk Ching Lai";
         document.querySelector("[id='pg:frm:pb:saveButton']").click();
@@ -288,6 +289,7 @@
                     }
  
                     if (ThereIsAnError !== "1") {
+                    localStorage.setItem('RenewFile', 1);
                         if (url.includes("?srPos")) {
                             window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + url.match(/(?<=\.com\/)[^?]+(?=\?srPos)/) + '&status=Renewed';
                         }
@@ -298,7 +300,6 @@
                         else {
                             window.location.href = 'https://threeholdings--c.vf.force.com/apex/MGAClientFileStatusChangePage?id=' + id + '&status=Renewed';
                         }
-                        localStorage.setItem('RenewFile', 1);
                     }
                 };
                 reader.readAsText(file);
