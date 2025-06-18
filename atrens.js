@@ -308,44 +308,6 @@
                 reader.readAsText(file);
             }
         });
- 
-        var button2 = document.createElement('button');
-        button2.innerText = 'Atrens New';
-        button2.style.position = 'fixed';
-        button2.style.bottom = '50px';
-        button2.style.left = '20px';
-        button2.style.zIndex = '1000';
-        document.body.appendChild(button2);
- 
-        // Create the file input element
-        var fileInput2 = document.createElement('input');
-        fileInput2.type = 'file';
-        fileInput2.style.display = 'none';
-        fileInput2.accept = '.txt'; // Using CSV format
-        document.body.appendChild(fileInput2);
- 
-        button2.addEventListener('click', function() {
-            fileInput2.click();
-        });
- 
-        fileInput2.addEventListener('change', function(event2) {
-            var file2 = event2.target.files[0];
-            if (file2) {
-                var reader2 = new FileReader();
-                reader2.onload = function(e) {
-                    var text2 = e.target.result;
-                    localStorage.setItem('text2', text2);
- 
-                    var values2 = parseCSV(localStorage.getItem('text2'));
- 
-                    document.getElementById("sbstr").value = values2[1][0];
-                    document.evaluate('/html/body/div/div[2]/table/tbody/tr/td[1]/div/div[1]/form/div[2]/div[1]/input[3]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
-                    localStorage.setItem('Search1Results', 1);
- 
-                };
-                reader2.readAsText(file2);
-            }
-        });
     }
  
     function parseCSV(text) {
