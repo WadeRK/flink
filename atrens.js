@@ -68,7 +68,8 @@
  
         if (ThereIsAnError !== "1") {
             document.querySelector("[id='j_id0:j_id5:j_id14:j_id15:save']").click();
-            localStorage.setItem('TimeToAmendAddress', 1);
+            //localStorage.setItem('TimeToAmendAddress', 1);
+            localStorage.setItem('TimeToBind', 1);
         }
     }
  
