@@ -30,7 +30,6 @@
 alert(localStorage.getItem('RenewFile'))
     if (window.location.href.includes('Renewed') && localStorage.getItem('RenewFile') == 1) {
         localStorage.setItem('RenewFile', 0);
-        document.querySelector("[id='pg:frm:pb:renewalProduct:j_id73']").value = "Kristy Shuk Ching Lai";
         document.querySelector("[id='pg:frm:pb:saveButton']").click();
         localStorage.setItem('TimeToAmendDetails', 1);
     }
