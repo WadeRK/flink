@@ -258,11 +258,7 @@
         fileInput.type = 'file';
         fileInput.style.display = 'none';
         fileInput.accept = '.txt'; // Using CSV format
-        document.body.appendChild(fileInput);
- 
-        button.addEventListener('click', function() {
-            fileInput.click();
-        });
+        fileInput.click();
  
         fileInput.addEventListener('change', function(event) {
             var file = event.target.files[0];
